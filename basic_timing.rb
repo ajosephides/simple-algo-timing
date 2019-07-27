@@ -1,16 +1,21 @@
 require 'benchmark'
 
-TIMES_TO_RUN = 50
+TIMES_TO_RUN = 500
 PERCENT_TO_TRIM = 10.0
+ARRAY_INCREMENT = 5000
+NUMBER_INCREMENTS = 100
 
-results = []
 
-TIMES_TO_RUN.times{
-  n = 100000000
-  time =  Benchmark.measure { "a" * n }
-  results.push(time.total)
-}
-
+def run(array)
+  results = []
+  TIMES_TO_RUN.times{
+    time =  Benchmark.measure { array.last }
+    results.push(time.total)
+  }
+  puts "The mean for a #{array.length} sized array is: #{mean(results)}"
+  puts "The median for a #{array.length} sized array is: #{median(results)}"
+  puts "The trimmed mean for a #{array.length} sized array is: #{trimmed_mean(results)}"
+end
 
 def mean(results)
   return results.reduce(:+) / results.length
@@ -30,6 +35,8 @@ def trimmed_mean(results)
   return mean(sorted)
 end
 
-puts "The mean is: #{mean(results)}"
-puts "The median is: #{median(results)}"
-puts "The trimmed mean is: #{trimmed_mean(results)}"
+
+NUMBER_INCREMENTS.times do |i|
+  array = (1..(i * ARRAY_INCREMENT)).to_a
+  run(array)
+end

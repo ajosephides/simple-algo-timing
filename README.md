@@ -18,3 +18,8 @@ Basic plan:
  - order results
  - discard top and bottom 5%
  - calc mean and median 
+
+
+ #Setup
+ Make sure you have installed **imagemagick** before running bundle. If using OSX Mojave try this:
+ `brew install imagemagick@6 && brew link imagemagick@6 --force`

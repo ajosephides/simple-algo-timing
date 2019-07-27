@@ -1,5 +1,6 @@
 require 'benchmark'
 require 'gruff'
+require_relative './shuffle.rb'
 
 TIMES_TO_RUN = 50
 PERCENT_TO_TRIM = 10.0
@@ -12,6 +13,8 @@ array_sizes = {}
 @means = []
 @medians = []
 @trimmed_means = []
+
+
 
 def run
   NUMBER_INCREMENTS.times do |i|
@@ -35,7 +38,7 @@ private
 def time(array)
   results = []
   TIMES_TO_RUN.times{
-    time =  Benchmark.measure { array.last }
+    time =  Benchmark.measure { aj_shuffle(array) }
     results.push(time.total)
   }
   return results

@@ -17,7 +17,6 @@ end
 # works fine on a small array but crashes on anything large.
 def aj_shuffle_2(array, shuffled = [])
   if array.length > 0
-    shuffled = shuffled
     random_index = rand(array.length)
     shuffled.push(array[random_index])
     array.delete_at(random_index)
@@ -68,10 +67,3 @@ def fisher_yates_shuffle(array)
   end
   return array
 end 
-
-# arr = [1,2,3,4,5,6,7,8,9]
-# p aj_shuffle(arr)
-# p aj_shuffle_2(arr)
-# p aj_shuffle_3([1,2,3,4,5,6,7,8,9])
-# p aj_shuffle_4([1,2,3,4,5,6,7,8,9])
-# p fisher_yates_shuffle([1,2,3,4,5,6,7,8,9])

@@ -15,29 +15,22 @@ array_sizes = {}
 @medians = []
 @trimmed_means = []
 
-def run
+
+def run(algorithm, algorithm_name)
   NUMBER_INCREMENTS.times do |i|
     array = set_up_array(i)
-    results = time(array)
+    results = time(array, algorithm)
     populate_results(results, array.length)
+    plot_graph(algorithm_name)
   end
-end
-
-def plot_line
-  g = Gruff::Line.new
-  g.title = 'A plot of benchmark means'
-  g.data :Mean, @means
-  g.data :Median, @medians
-  g.data :Trimmed_Mean, @trimmed_means
-  g.write('algo_timings.png')
 end
 
 private
 
-def time(array)
+def time(array, algorithm)
   results = []
   TIMES_TO_RUN.times{
-    time =  Benchmark.measure { aj_reverse2(array) }
+    time =  Benchmark.measure { algorithm.call(array) }
     results.push(time.total)
   }
   return results
@@ -75,7 +68,11 @@ def populate_results(results, size)
   @trimmed_means_hash[size] = trimmed_mean(results)
 end
 
-
-
-run
-plot_line
+def plot_graph(algorithm_name)
+  g = Gruff::Line.new
+  g.title = "A plot of mean, median and trimmed mean for the algorith #{algorithm_name}"
+  g.data :Mean, @means
+  g.data :Median, @medians
+  g.data :Trimmed_Mean, @trimmed_means
+  g.write("algo_timings_#{algorithm_name}.png")
+end

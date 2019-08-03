@@ -23,6 +23,7 @@ def run(algorithm, algorithm_name)
     populate_results(results, array.length)
     plot_graph(algorithm_name)
   end
+  clear_results
 end
 
 private
@@ -75,4 +76,14 @@ def plot_graph(algorithm_name)
   g.data :Median, @medians
   g.data :Trimmed_Mean, @trimmed_means
   g.write("algo_timings_#{algorithm_name}.png")
+end
+
+def clear_results
+  array_sizes = {}
+  @means_hash = {}
+  @medians_hash = {}
+  @trimmed_means_hash = {}
+  @means = []
+  @medians = []
+  @trimmed_means = []
 end

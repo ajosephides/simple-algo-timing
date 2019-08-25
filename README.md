@@ -5,7 +5,7 @@ The product will be a graphical plot of time (y-axis) vs array size (x)
 
 # Approach
 ### Input:
- - algorithm to run
+ - algorithm to run - these are written in a separate file and imported into `basic-timing.rb`. I have grouped the algos in files relating to what they do - e.g. a range of attempts on `reverse` are in one file.
  - Name of algorithm
 
 ### Output
@@ -42,3 +42,7 @@ irb
 require_relative './basic_timing'
 run(method(:fisher_yates_shuffle), 'Fisher-Yates')
 ```
+
+# Features to add
+- alter algorithm to run on to be an array of random numbers. Currently the array will have no duplicate numbers and so certain algorithms - e.g. find unique can not be benchmarked.
+- allow for multiple algos to be run against the same array and all plotted together so an easier comparison can be seen
